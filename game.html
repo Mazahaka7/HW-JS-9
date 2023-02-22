@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Play a game</title>
+  </head>
+  <body>
+    <style>
+      body {
+        background-color: green;
+      }
+      img {
+        position: absolute;
+        top: 50vh;
+        left: 50%;
+        z-index: 100;
+
+        width: 50px;
+      }
+      .score {
+        width: 80px;
+        height: 40px;
+        background-color: #fff;
+
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
+      .main {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .gate {
+        width: 100px;
+        height: 50vh;
+        border: 5px solid black;
+      }
+    </style>
+    <div class="score">
+      <div>
+        <span>Left_T:</span>
+        <span class="left"></span>
+      </div>
+      <div>
+        <span>Rigth_T:</span>
+        <span class="right"></span>
+      </div>
+    </div>
+    <div class="main">
+      <div class="gate" id="gate1"></div>
+      <div class="gate" id="gate2"></div>
+    </div>
+    <img src="./img/soccer_ball2.svg" alt="" class="ball" draggable="true" />
+    <script>
+      const ball = document.querySelector("img");
+      const gate1 = document.getElementById("gate1");
+      const gate2 = document.getElementById("gate2");
+      const field = document.querySelector(".main");
+      const score = document.querySelector(".score");
+      const teamLeft = document.querySelector(".left");
+      const teamRight = document.querySelector(".right");
+
+      field.addEventListener("dragover", function (e) {
+        e.preventDefault();
+        console.log(e);
+      });
+
+      field.addEventListener("drop", dropBall);
+      gate1.addEventListener("drop", dropBall);
+      gate2.addEventListener("drop", dropBall);
+
+      function dropBall(e) {
+        this.appendChild(ball);
+        ball.style.left = e.clientX - ball.offsetWidth / 2 + "px";
+        ball.style.top = e.clientY - ball.offsetHeight / 2 + "px";
+      }
+
+      gate1.addEventListener("mouseleave", returnBallCenter);
+      gate2.addEventListener("mouseleave", returnBallCenter);
+
+      function returnBallCenter(e) {
+        ball.style.top = 50 + "vh";
+        ball.style.left = 50 + "%";
+      }
+
+      gate1.addEventListener("dragenter", goalCount1);
+      gate2.addEventListener("dragenter", goalCount2);
+
+      let teamscore1 = 0;
+      let teamscore2 = 0;
+      function goalCount1() {
+        teamscore1++;
+        teamLeft.innerHTML = teamscore1;
+        console.log;
+      }
+      function goalCount2() {
+        teamscore2++;
+        teamRight.innerHTML = teamscore2;
+        console.log;
+      }
+    </script>
+  </body>
+</html>
