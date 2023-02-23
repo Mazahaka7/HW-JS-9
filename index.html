@@ -43,11 +43,11 @@
     </style>
     <div class="score">
       <div>
-        <span>Left_T:</span>
+        <span>L_team:</span>
         <span class="left"></span>
       </div>
       <div>
-        <span>Rigth_T:</span>
+        <span>R_team:</span>
         <span class="right"></span>
       </div>
     </div>
@@ -70,24 +70,28 @@
         console.log(e);
       });
 
+      //Event on a drop to field and both gates
       field.addEventListener("drop", dropBall);
       gate1.addEventListener("drop", dropBall);
       gate2.addEventListener("drop", dropBall);
 
       function dropBall(e) {
         this.appendChild(ball);
+        //correcting of ball coordinate
         ball.style.left = e.clientX - ball.offsetWidth / 2 + "px";
         ball.style.top = e.clientY - ball.offsetHeight / 2 + "px";
       }
 
+      //Ball is back to the center
       gate1.addEventListener("mouseleave", returnBallCenter);
       gate2.addEventListener("mouseleave", returnBallCenter);
-
+  
       function returnBallCenter(e) {
         ball.style.top = 50 + "vh";
         ball.style.left = 50 + "%";
       }
 
+      //Score of goals
       gate1.addEventListener("dragenter", goalCount1);
       gate2.addEventListener("dragenter", goalCount2);
 
