@@ -424,7 +424,6 @@
         el.addEventListener("mouseenter", function (e) {
           tooltip = document.createElement("div");
           tooltip.innerText = this.getAttribute("data-region");
-          console.log(tooltip);
           tooltip.classList.add("show");
           tooltip.style.top =
             this.nextElementSibling.getAttribute("cy") - 50 + "px";
